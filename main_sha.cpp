@@ -12,24 +12,28 @@ int main(void) {
 
     //initialize timing variables to compare the times of the serial and parallel algorithms
     struct timespec start, stop;
-    double time;
+    double time_serial, time_parallel;
 
     for (unsigned int i = 0; i < strings_to_hash.size(); i++) {
         string s = strings_to_hash[i];
+        unsigned char hash_serial[20];
+        unsigned char hash_parallel[20];
+        printf("****************\nTEST #%d   string=%s\n****************\n\n", i, s);
         
-        //test serial time and print results
+        //test serial time
         if(clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
-        unsigned char hash[20];
-        sha1::Calc(s.c_str(), s.length(), hash);
+        sha1::Calc(s.c_str(), s.length(), hash_serial);
         if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
-		time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
-        printf("Execution time = %f sec\n", time);	
+		time_serial = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;	
 
-        //test parallel time and print results
+        //test parallel time
         if(clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
-        //EXECUTION
+        sha1_parallel::Calc(s.c_str(), s.length(), hash_parallel);
         if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
-		time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
-        printf("Execution time = %f sec\n", time);	
+		time_parallel = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
+
+        //print the results
+        printf("Serial hash:   %s\nParallel hash: %s\n\n", hash_serial, hash_parallel);
+        printf("Serial time:   %f sec\nParallel time: %f sec", time_serial, time_parallel);
     }
 }
