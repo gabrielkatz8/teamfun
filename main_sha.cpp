@@ -15,9 +15,12 @@ int main(void) {
     double time;
 
     for (unsigned int i = 0; i < strings_to_hash.size(); i++) {
+        string s = strings_to_hash[i];
+        
         //test serial time and print results
         if(clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
-        //EXECUTION
+        unsigned char hash[20];
+        sha1::Calc(s.c_str(), s.length(), hash);
         if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
 		time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
         printf("Execution time = %f sec\n", time);	
@@ -28,6 +31,5 @@ int main(void) {
         if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
 		time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
         printf("Execution time = %f sec\n", time);	
-
     }
 }

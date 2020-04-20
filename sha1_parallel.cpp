@@ -140,6 +140,7 @@ namespace sha1_parallel
             endCurrentBlock = currentBlock + 64;
 
             // Init the round buffer with the 64 byte block data.
+            #pragma omp parallel for
             for (int roundPos = 0; currentBlock < endCurrentBlock; currentBlock += 4)
             {
                 // This line will swap endian on big endian and keep endian on little endian.
@@ -155,6 +156,7 @@ namespace sha1_parallel
         endCurrentBlock = static_cast<int>(bytelength) - currentBlock;
         ClearWBuffert(w);
         int lastBlockBytes = 0;
+        #pragma omp parallel for
         for (;lastBlockBytes < endCurrentBlock; ++lastBlockBytes)
         {
             w[lastBlockBytes >> 2] |= static_cast<unsigned int>(sarray[lastBlockBytes + currentBlock]) << ((3 - (lastBlockBytes & 3)) << 3);
@@ -169,6 +171,7 @@ namespace sha1_parallel
         InnerHash(result, w);
 
         // Store hash in result pointer, and make sure we get in in the correct order on both endian models.
+        #pragma omp parallel for
         for (int hashByte = 20; --hashByte >= 0;)
         {
             hash[hashByte] = (result[hashByte >> 2] >> (((3 - hashByte) & 0x3) << 3)) & 0xff;
