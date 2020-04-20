@@ -46,13 +46,18 @@ int main()
         // }
         // ifile.close();
         int wordNum = 1;
-         while (getline(ifile, line)) {
+        std::vector<std::string> passcodes;
+        while (getline(ifile, line)) {
+        	passcodes.push_back(line);
+        }
+
+        for (int i = 0; i < passcodes.size(); i++) {
         	unsigned char arr[20];
-        	sha1::Calc(line.c_str(), line.length(), arr);
+        	sha1::Calc(passcodes[i].c_str(), passcodes[i].length(), arr);
         	std::string hexString;
         	hexString.resize(40);
         	sha1::ToHexString(arr, &hexString[0]);
-        	h.insert({hexString, line});
+        	h.insert({hexString, passcodes[i]});
         	//std::cout << words[i] <<  " " << h[words[i]] << std::endl;
 	        
 	        std::vector<int> indices(1);
