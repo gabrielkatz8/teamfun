@@ -7,6 +7,8 @@
 #include <ostream>
 #include <vector>
 
+#include <time.h>
+
 int main()
 {
         //std::string phrasesFile = argv[3];
@@ -50,6 +52,11 @@ int main()
         while (getline(ifile, line)) {
         	passcodes.push_back(line);
         }
+
+        // measure the start time here
+		struct timespec start, stop; 
+		double time;
+		if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
 
         for (int i = 0; i < passcodes.size(); i++) {
         	unsigned char arr[20];
@@ -150,6 +157,13 @@ int main()
 	        }
 	        wordNum++;
 	    }
+
+	    // measure the end time here
+		if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
+		time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
+	
+		// print out the execution time here
+		printf("Execution time = %f sec\n", time);
         
         std::ofstream ofile("solved.txt");
         
