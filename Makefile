@@ -6,5 +6,8 @@ SrcMainSerial: SrcMainSerial.cpp sha1.h sha1.cpp
 ParallelPass: ParallelPass.cpp sha1.h sha1.cpp
 	g++ -g -Wall -std=c++11 ParallelPass.cpp sha1.h -o ParallelPass -fopenmp
 
+ParallelSym: ParallelSym.cpp sha1.h sha1.cpp
+	g++ -g -Wall -std=c++11 ParallelSym.cpp sha1.h -o ParallelSym -fopenmp
+
 clean: 
-	rm -f *.o SrcMainSerial ParallelPass
+	rm -f *.o SrcMainSerial ParallelPass ParallelSym
