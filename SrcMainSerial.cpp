@@ -12,7 +12,7 @@
 int main()
 {
         //std::string phrasesFile = argv[3];
-        std::string pFile = "passwords.txt";
+        std::string pFile = "test-hex.txt";
         
         std::string ch = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
 
@@ -58,13 +58,13 @@ int main()
 		double time;
 		if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
 
-        for (int i = 0; i < passcodes.size(); i++) {
-        	unsigned char arr[20];
-        	sha1::Calc(passcodes[i].c_str(), passcodes[i].length(), arr);
-        	std::string hexString;
-        	hexString.resize(40);
-        	sha1::ToHexString(arr, &hexString[0]);
-        	h.insert({hexString, passcodes[i]});
+        for (size_t i = 0; i < passcodes.size(); i++) {
+        	//unsigned char arr[20];
+        	//sha1::Calc(passcodes[i].c_str(), passcodes[i].length(), arr);
+        	//std::string hexString;
+        	//hexString.resize(40);
+        	//sha1::ToHexString((unsigned char*)(passcodes[i].c_str()), &hexString[0]);
+        	h.insert({passcodes[i], passcodes[i]});
         	//std::cout << words[i] <<  " " << h[words[i]] << std::endl;
 	        
 	        std::vector<int> indices(1);
@@ -107,9 +107,11 @@ int main()
 	        	// }
 	        	// else {
 	        		std::string attempt = "";
-	        		for (int i = 0; i < indices.size(); i++) {
+	        		for (size_t i = 0; i < indices.size(); i++) {
 	        			attempt += ch[indices[i]];
 	        		}
+	        		//uncomment line below for animation
+	        		//std::cout << "\r" << attempt;
 	        		//std::cout << wordNum << " " << attempt << std::endl;
 	        		unsigned char hash[20];
 		        	sha1::Calc(attempt.c_str(), attempt.length(), hash);
@@ -118,7 +120,7 @@ int main()
 		        	sha1::ToHexString(hash, &hexStr[0]);
 		        	if (h.find(hexStr) != h.end()) {
 		        		
-		        		std::pair<std::string, std::string> newPair = std::make_pair(h[hexStr], hexStr);
+		        		std::pair<std::string, std::string> newPair = std::make_pair(attempt, hexStr);
 		        		solved.push_back(newPair);
 		        		h.erase(hexStr);
 		        		done = true;
