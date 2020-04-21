@@ -66,13 +66,12 @@ int main()
 		omp_set_num_threads(P);
 		#pragma omp parallel for
         for (size_t i = 0; i < passcodes.size(); i++) {
-        	//unsigned char arr[20];
-        	//sha1::Calc(passcodes[i].c_str(), passcodes[i].length(), arr);
-        	//std::string hexString;
-        	//hexString.resize(40);
-        	//sha1::ToHexString((unsigned char*)(passcodes[i].c_str()), &hexString[0]);
-        	h.insert({passcodes[i], passcodes[i]});
-        	//std::cout << words[i] <<  " " << h[words[i]] << std::endl;
+        	unsigned char arr[20];
+        	sha1::Calc(passcodes[i].c_str(), passcodes[i].length(), arr);
+        	std::string hexString;
+        	hexString.resize(40);
+        	sha1::ToHexString(arr, &hexString[0]);
+        	h.insert({hexString, passcodes[i]});
 	        
 	        std::vector<int> indices(1);
 	        indices[0] = 0;

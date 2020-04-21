@@ -1,5 +1,5 @@
 #!/bin/bash 
-#SBATCH --ntasks=2 
+#SBATCH --ntasks=1 
 #SBATCH --time=24:00:00
 
 cd /home/rcf-proj/xq2/ahnmelis/teamfun/
