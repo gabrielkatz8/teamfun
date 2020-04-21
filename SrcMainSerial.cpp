@@ -12,7 +12,7 @@
 int main()
 {
         //std::string phrasesFile = argv[3];
-        std::string pFile = "test-hex.txt";
+        std::string pFile = "pass-phrasessmall.txt";
         
         std::string ch = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
 
