@@ -17,7 +17,7 @@
 int main()
 {
         //std::string phrasesFile = argv[3];
-        std::string pFile = "pass-phrasessmall.txt";
+        std::string pFile = "common-pass.txt";
         
         std::string ch = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
 
