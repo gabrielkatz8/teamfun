@@ -192,6 +192,9 @@ int main()
         for (unsigned int i = 0; i < solvedSize; i++) {
             ofile << solved[i].first << "," << solved[i].second << "\n";
         }
+
+         //put execution time in file
+        ofile << "Execution time = " << time << " sec\n";
         
         ofile.close();
         

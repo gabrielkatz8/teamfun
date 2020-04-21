@@ -174,6 +174,8 @@ int main()
             ofile << solved[i].first << "," << solved[i].second << "\n";
         }
         
+        //put execution time in file
+        ofile << "Execution time = " << time << " sec\n";
         ofile.close();
         
     //}
