@@ -39,7 +39,6 @@ int main(void) {
         //test parallel time
         if(clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
         //sha1_parallel::Calc(s.c_str(), s.length(), hash_parallel);
-        hash_parallel = (unsigned char*)"NULL";
         if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
 		time_parallel = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
 
