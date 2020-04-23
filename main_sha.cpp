@@ -43,7 +43,8 @@ int main(void) {
 		time_parallel = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
 
         //print the results
-        printf("Serial hash:   %s\nParallel hash: %s\n\n", hash_serial, hash_parallel);
+        //printf("Serial hash:   %s\nParallel hash: %s\n\n", hash_serial, hash_parallel);
+        printf("Serial hash:   %s\n", hash_serial);
         printf("Serial time:   %f sec\nParallel time: %f sec\n\n\n", time_serial, time_parallel);
     }
 }
