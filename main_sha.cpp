@@ -42,6 +42,6 @@ int main(void) {
 
         //print the results
         printf("Serial hash:   %s\nParallel hash: %s\n\n", hash_serial, hash_parallel);
-        printf("Serial time:   %f sec\nParallel time: %f sec", time_serial, time_parallel);
+        printf("Serial time:   %f sec\nParallel time: %f sec\n\n\n", time_serial, time_parallel);
     }
 }
