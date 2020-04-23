@@ -6,15 +6,20 @@
 
 using namespace std;
 
-int main(void) {
-    //get list of strings to hash
-    vector<string> strings_to_hash;
+string strings_to_hash[5] = {
+    "ghtysjkadkjf",
+    "lksdfnkjsdbjkfanlksdklfnjklasdlfhjklasdfhkajlsdckjbasdjkfghjkascgaldsfhkjasdjkfhcjksadzbcjkbdfghjk",
+    "alkdhfkj",
+    "asodhjioasdhasklcfkjdsajfhjklsdafasdlfhkjnsadcjkbasjkdfhkjSDFGUIG",
+    "lkhjIBFDWUI%&^%@kjhgfdbk"
+};
 
+int main(void) {
     //initialize timing variables to compare the times of the serial and parallel algorithms
     struct timespec start, stop;
     double time_serial, time_parallel;
 
-    for (unsigned int i = 0; i < strings_to_hash.size(); i++) {
+    for (unsigned int i = 0; i < (unsigned int)sizeof(strings_to_hash); i++) {
         string s = strings_to_hash[i];
         unsigned char hash_serial[20];
         unsigned char hash_parallel[20];
