@@ -158,7 +158,7 @@ namespace sha1_parallel
         ClearWBuffert(w);
         int lastBlockBytes = 0;
         #pragma omp parallel for
-        for (;lastBlockBytes < endCurrentBlock; ++lastBlockBytes)
+        for (lastBlockBytes; lastBlockBytes < endCurrentBlock; ++lastBlockBytes)
         {
             w[lastBlockBytes >> 2] |= static_cast<unsigned int>(sarray[lastBlockBytes + currentBlock]) << ((3 - (lastBlockBytes & 3)) << 3);
         }
@@ -173,7 +173,7 @@ namespace sha1_parallel
 
         // Store hash in result pointer, and make sure we get in in the correct order on both endian models.
         #pragma omp parallel for
-        for (int hashByte = 20; --hashByte >= 0;)
+        for (int hashByte = 20; hashByte >= 0; --hashByte)
         {
             hash[hashByte] = (result[hashByte >> 2] >> (((3 - hashByte) & 0x3) << 3)) & 0xff;
         }
