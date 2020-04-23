@@ -135,6 +135,7 @@ namespace sha1_parallel
         const int endOfFullBlocks = static_cast<int>(bytelength) - 64;
         int endCurrentBlock;
         int currentBlock = 0;
+        int currentBlock_temp = currentBlock; //allows initialization of currentBlock to satisfy OpenMP constraints
 
         //set the number of threads
         omp_set_num_threads(8);
@@ -146,7 +147,7 @@ namespace sha1_parallel
             // Init the round buffer with the 64 byte block data.
             int roundPos = 0;
             #pragma omp parallel for
-            for (currentBlock = 0; currentBlock < endCurrentBlock; currentBlock += 4)
+            for (currentBlock = currentBlock_temp; currentBlock < endCurrentBlock; currentBlock += 4)
             {
                 // This line will swap endian on big endian and keep endian on little endian.
                 w[roundPos++] = static_cast<unsigned int>(sarray[currentBlock + 3])
@@ -154,6 +155,7 @@ namespace sha1_parallel
                         | ((static_cast<unsigned int>(sarray[currentBlock + 1]) << 16))
                         | ((static_cast<unsigned int>(sarray[currentBlock]) << 24));
             }
+            currentBlock_temp = currentBlock;
             InnerHash(result, w);
         }
 
