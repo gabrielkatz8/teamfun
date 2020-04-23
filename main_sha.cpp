@@ -26,7 +26,7 @@ int main(void) {
         string s = strings_to_hash[i];
         unsigned char hash_serial[20];
         unsigned char hash_parallel[20];
-        printf("****************\nTEST #%d   string=%s\n****************\n\n", i, s);
+        printf("****************\nTEST #%d   string=%s\n****************\n\n", i, s.c_str());
         
         //test serial time
         if(clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
