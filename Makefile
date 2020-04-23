@@ -12,6 +12,9 @@ ParallelPass: ParallelPass.cpp sha1.h sha1.cpp
 ParallelSym: ParallelSym.cpp sha1.h sha1.cpp
 	g++ -g -Wall -std=c++11 ParallelSym.cpp sha1.h -o ParallelSym -fopenmp
 
+ParallelCombo: ParallelCombo.cpp sha1.h sha1.cpp
+	g++ -g -Wall -std=c++11 ParallelCombo.cpp sha1.h -o ParallelCombo -fopenmp
+
 ParallelSym2: ParallelSym2.cpp sha1.h sha1.cpp
 	g++ -g -Wall -std=c++11 ParallelSym2.cpp sha1.h -o ParallelSym2 -fopenmp
 
