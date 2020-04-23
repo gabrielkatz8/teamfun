@@ -22,6 +22,8 @@ int main(void) {
     struct timespec start, stop;
     double time_serial, time_parallel;
 
+    printf("BEGIN SHA-TEST:\n\n");
+
     for (unsigned int i = 0; i < (unsigned int)sizeof(strings_to_hash); i++) {
         string s = strings_to_hash[i];
         unsigned char hash_serial[20];
