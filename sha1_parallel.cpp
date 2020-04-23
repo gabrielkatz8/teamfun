@@ -37,6 +37,7 @@
 */
 
 #include "sha1_parallel.h"
+#include <omp.h>
 
 namespace sha1_parallel
 {

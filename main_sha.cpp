@@ -2,7 +2,10 @@
 #include "sha1_parallel.h"
 #include <vector>
 #include <string>
+#include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
+#include <omp.h>
 
 using namespace std;
 
