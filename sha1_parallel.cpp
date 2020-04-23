@@ -144,8 +144,9 @@ namespace sha1_parallel
             endCurrentBlock = currentBlock + 64;
 
             // Init the round buffer with the 64 byte block data.
+            int roundPos = 0;
             #pragma omp parallel for
-            for (int roundPos = 0; currentBlock < endCurrentBlock; currentBlock += 4)
+            for (currentBlock = 0; currentBlock < endCurrentBlock; currentBlock += 4)
             {
                 // This line will swap endian on big endian and keep endian on little endian.
                 w[roundPos++] = static_cast<unsigned int>(sarray[currentBlock + 3])
