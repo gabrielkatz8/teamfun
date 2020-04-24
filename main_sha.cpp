@@ -51,7 +51,7 @@ int main(void) {
         sha1::ToHexString((const unsigned char*) hash_parallel, &parallel_formatted[0]);
 
         //print the results
-        printf("Serial hash:   %s\nParallel hash: %s\n", serial_formatted, parallel_formatted);
+        printf("Serial hash:   %s\nParallel hash: %s\n", serial_formatted.c_str(), parallel_formatted.c_str());
         //printf("Serial hash:   %s\n", hash_serial);
         printf("Serial time:   %f sec\nParallel time: %f sec\n\n\n", time_serial, time_parallel);
     }
