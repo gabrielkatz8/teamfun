@@ -44,9 +44,11 @@ int main(void) {
 		time_parallel = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
 
         //format the results
-        char* serial_formatted, parallel_formatted;
-        sha1::ToHexString((const unsigned char*) hash_serial, serial_formatted);
-        sha1::ToHexString((const unsigned char*) hash_parallel, parallel_formatted);
+        string serial_formatted, parallel_formatted;
+        serial_formatted.resize(40);
+        parallel_formatted.resize(40);
+        sha1::ToHexString((const unsigned char*) hash_serial, &serial_formatted[0]);
+        sha1::ToHexString((const unsigned char*) hash_parallel, &parallel_formatted[0]);
 
         //print the results
         printf("Serial hash:   %s\nParallel hash: %s\n", serial_formatted, parallel_formatted);
