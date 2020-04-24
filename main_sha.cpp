@@ -25,7 +25,7 @@ string strings_to_hash[5] = {
     "lksdfjjhghjvh",
     "alkdhfkjkjhkjhjkjk",
     "asodhjioasdklkjbkjbkbkbjklkj",
-    "lkhjIBFDWUI%&^gfdbk,nkjbhbbjhvhgfkyftydjtyfkghjtyulkjyasdfgtyjhj"
+    "lkhjIBFDWUI%&^gfdbk,nkjbhbbjhvhgfkyftydjtyfkghjtyulkjyasdfgtyjh" //if this string is any bigger, the parallel version won't execute!
 };
 
 int main(void) {
