@@ -22,10 +22,10 @@ string strings_to_hash[5] = {
 
 string strings_to_hash[5] = {
     "gty",
-    "lksdfj",
-    "alkdhfkj",
-    "asodhjioasdkl",
-    "lkhjIBFDWUI%&^gfdbk"
+    "lksdfjjhghjvh",
+    "alkdhfkjkjhkjhjkjk",
+    "asodhjioasdklkjbkjbkbkbjklkj",
+    "lkhjIBFDWUI%&^gfdbk,nkjbhbbjhvhgfkyftydjtyf"
 };
 
 int main(void) {
