@@ -25,7 +25,7 @@ string strings_to_hash[5] = {
     "lksdfjjhghjvh",
     "alkdhfkjkjhkjhjkjk",
     "asodhjioasdklkjbkjbkbkbjklkj",
-    "lkhjIBFDWUI%&^gfdbk,nkjbhbbjhvhgfkyftydjtyfkghjtyulkjyasdfghjklp"
+    "lkhjIBFDWUI%&^gfdbk,nkjbhbbjhvhgfkyftydjtyfkghjtyulkjyasdfg"
 };
 
 int main(void) {
