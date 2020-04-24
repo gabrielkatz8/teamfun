@@ -10,12 +10,22 @@
 using namespace std;
 
 #define ARRAY_LENGTH 5
+/*
 string strings_to_hash[5] = {
     "ghtysjkadkjf",
     "lksdfnkjsdbjkfanlksdklfnjklasdlfhjklasdfhkajlsdckjbasdjkfghjkascgaldsfhkjasdjkfhcjksadzbcjkbdfghjk",
     "alkdhfkj",
     "asodhjioasdhasklcfkjdsajfhjklsdafasdlfhkjnsadcjkbasjkdfhkjSDFGUIG",
     "lkhjIBFDWUI%&^%@kjhgfdbk"
+};
+*/
+
+string strings_to_hash[5] = {
+    "gty",
+    "lksdfj",
+    "alkdhfkj",
+    "asodhjioasdkl",
+    "lkhjIBFDWUI%&^gfdbk"
 };
 
 int main(void) {
