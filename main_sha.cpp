@@ -36,12 +36,14 @@ int main(void) {
         sha1::Calc(s.c_str(), s.length(), hash_serial);
         if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
 		time_serial = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;	
+        printf("Serial test complete...\n");
 
         //test parallel time
         if(clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
         sha1_parallel::Calc(s.c_str(), s.length(), hash_parallel);
         if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
 		time_parallel = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
+        printf("Parallel test complete...\n\n");
 
         //format the results
         string serial_formatted, parallel_formatted;
