@@ -138,7 +138,7 @@ namespace sha1_parallel
         int currentBlock_temp = currentBlock; //allows initialization of currentBlock to satisfy OpenMP constraints
 
         //set the number of threads
-        omp_set_num_threads(8);
+        omp_set_num_threads(4);
 
         while (currentBlock <= endOfFullBlocks)
         {
