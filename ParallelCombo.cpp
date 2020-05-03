@@ -9,10 +9,13 @@
 
 #include <time.h>
 #include <omp.h>
+#include <mutex>
 
-#define P 2
+#define P 8
 
 #pragma GCC diagnostic ignored "-Wsign-compare"
+
+std::mutex m;
 
 int main()
 {
@@ -58,6 +61,9 @@ int main()
         	passcodes.push_back(line);
         }
 
+	//for PA report: create an array of doubles to hold accumulated time of values received from omp_get_wtime
+	//this is a shared variable, so we will use a mutex m to access it
+	double accumulated_time[4] = {0.0, 0.0, 0.0, 0.0};
         // measure the start time here
 		struct timespec start, stop; 
 		double time;
@@ -99,14 +105,6 @@ int main()
 	        //                 val = h.Find(hexStr);
 	        //                 if (val != nullptr) {
 	        //                     solved[*val].first = hexStr;
-	        //                     solved[*val].second = test;
-	        //                 }
-	        //             }
-	        //         //}
-	        //         });
-	        //     });
-	        // });
-
 	        bool done = false;
 	        while (!done) {
 	        	// if (numPasswords == 0) {
@@ -117,6 +115,9 @@ int main()
 	        		for (size_t i = 0; i < indices.size()-1; i++) {
 	        			attempt += ch[indices[i]];
 	        		}
+				//set bool variable to make sure we are tracking the time of the first core only
+				bool first_core = false;
+				if (omp_get_thread_num() == 0) first_core = true;
 	        		//parallelize checking symbols
 				#pragma omp parallel for num_threads(P) schedule(static)
 	        		for (size_t i = 0; i < ch.size(); i++) {
@@ -126,10 +127,30 @@ int main()
 		        		//std::cout << "\r" << temp_attempt;
 		        		//std::cout << wordNum << " " << attempt << std::endl;
 		        		unsigned char hash[20];
+                                        double Calc_start;
+					double Calc_end;
+					Calc_start = omp_get_wtime();
 			        	sha1::Calc(temp_attempt.c_str(), temp_attempt.length(), hash);
-			        	std::string hexStr;
+			        	Calc_end = omp_get_wtime();
+					if (first_core == true) {
+						m.lock();
+						accumulated_time[0] += Calc_end - Calc_start;
+						m.unlock();
+					}
+					double Hex_start;
+					double Hex_end;
+					Hex_start = omp_get_wtime();
+					std::string hexStr;
 			        	hexStr.resize(40);
 			        	sha1::ToHexString(hash, &hexStr[0]);
+					Hex_end = omp_get_wtime();
+					if (first_core == true) {
+						m.lock();
+						accumulated_time[1] += Hex_end - Hex_start;
+						m.unlock();
+					}
+					double Check_start, Check_end;
+					Check_start = omp_get_wtime();
 			        	if (h.find(hexStr) != h.end()) {
 			        		
 			        		std::pair<std::string, std::string> newPair = std::make_pair(temp_attempt, hexStr);
@@ -137,7 +158,12 @@ int main()
 			        		h.erase(hexStr);
 			        		done = true;
 			        	}
-
+					Check_end = omp_get_wtime();
+					if (first_core == true) {
+						m.lock();
+						accumulated_time[2] += Check_end - Check_start;
+						m.unlock();
+					}
 			        	int tid = omp_get_thread_num();
 			        	if (tid == P-1) {
 			        		//set last value in indices so that we go into next if statement
@@ -145,6 +171,9 @@ int main()
 			        	}
 	        		}
 	        		
+				double Indices_start, Indices_end;
+				Indices_start = omp_get_wtime();
+
 		        	//indices[indices.size() - 1]++;
 		        	if (indices[indices.size() - 1] == ch.size()) {
 
@@ -175,6 +204,12 @@ int main()
 		        			}
 		        		}
 		        	}
+				Indices_end = omp_get_wtime();
+				if (first_core == true) {
+					m.lock();
+					accumulated_time[3] += Indices_end - Indices_start;
+					m.unlock();
+				}
 	        	//}
 	        }
 	        wordNum++;
@@ -183,9 +218,8 @@ int main()
 	    // measure the end time here
 		if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
 		time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
-	
 		// print out the execution time here
-		printf("Execution time = %f sec\n", time);
+		//printf("Execution time = %f sec\n", time);
         
         std::ofstream ofile("solved_ParallelCombo_" + std::to_string(P)+ ".txt");
         
@@ -195,8 +229,11 @@ int main()
         }
 
          //put execution time in file
-        ofile << "Execution time = " << time << " sec\n";
-        
+        ofile << "Total Execution time = " << time << " sec\n";
+        ofile << "Sha Calc function time per thread: " << accumulated_time[0] << " sec\n";
+	ofile << "Hex conversion time per thread: " << accumulated_time[1] << " sec\n";
+	ofile << "Check attempt time per thread: " << accumulated_time[2] << " sec\n";
+	ofile << "Indices section time per thread: " << accumulated_time[3] << " sec\n";
         ofile.close();
         
     //}

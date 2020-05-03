@@ -1,0 +1,15 @@
+9sk4,95190e84937d5e2195d4a3e2e0219b948dea6857
+Pass,d7cd56f2a2a3f47830760edfb89946eb7b9e2cd1
+q1w2,5405737715ca693f05d7598ed346a93067133673
+qwer,1161e6ffd3637b302a5cd74076283a7bd1fc20d3
+wHaT,bff4896bab7d77d0847b2d2065762d9abfb4e5ab
+asdf,3da541559918a808c2402bba5012f6c60b27661c
+gOoP,1ccdcfe23f469120fd3e62910c85f1b4f8710ae3
+hehe,42525bb6d3b0dc06bb78ae548733e8fbb55446b3
+1234,7110eda4d09e062aa5e4a390b0a572ac0d2c0220
+ank0,eb13edd9f8b37b28eec009dc3be95bf3d19743b9
+Total Execution time = 169.756 sec
+Sha Calc function time per thread: 25.0298 sec
+Hex conversion time per thread: 3.8196 sec
+Check attempt time per thread: 3.1293 sec
+Indices section time per thread: 0.0591437 sec
