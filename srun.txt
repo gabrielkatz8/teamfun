@@ -1,1 +1,1 @@
-srun -n1 -c4 ./sha-test
+srun -n1 -c2 ./sha-test
