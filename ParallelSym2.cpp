@@ -16,7 +16,7 @@
 
 int main()
 {
-        //std::string phrasesFile = argv[3];
+       
         std::string pFile = "passwords.txt";
         
         std::string ch = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
@@ -26,33 +26,7 @@ int main()
         std::ifstream ifile(pFile);
         std::string line;
         std::vector<std::pair<std::string, std::string>> solved;
-        //int numPasswords = 0;
-        //std::vector<std::string> words;
-
-       
-        	//h[hexStr] = line;
-        	//numPasswords++;
-        	//words.push_back(hexStr);
-    
         
-        // std::ifstream phraseFile(phrasesFile);
-        // std::string p;
-        // std::vector<std::string> allPhrases;
-        // while (static_cast<bool>(getline(phraseFile, p))) {
-        //     allPhrases.emplace_back(p);
-        // }
-        
-        // std::ifstream ifile(pFile);
-        // std::string line;
-        // int i = 0;
-        
-        // while (static_cast<bool>(getline(ifile, line))) {
-            
-        //     h.Insert(line, i);
-        //     i++;
-        // }
-        // ifile.close();
-        //int wordNum = 1;
         std::vector<std::string> passcodes;
         while (getline(ifile, line)) {
         	passcodes.push_back(line);
@@ -124,20 +98,16 @@ int main()
         			if (static_cast<int>(indices.size()) - cnt < 0) {
         				
         				finished = true;
-        				// for (int i = 0; i < indices.size(); i++) {
-        				// 	indices[i] = 0;
-        				// }
-        				//std::cout << "here " << attempt << std::endl;
-        				//if (attempt == "mm") std::cout << 1 << std::endl;
+        				
         				indices.push_back(0);
         			}
         			else if (indices[indices.size() - cnt] == ch.size() - 1) {
-        				//if (attempt == "mm") std::cout << 2 << std::endl;
+        				
         				indices[indices.size() - cnt] = 0;
         				cnt++;
         			}
         			else {
-        				//if (attempt == "mm") std::cout << 3 << std::endl;
+        				
         				indices[indices.size() - cnt]++;
         				finished = true;
         			}
@@ -164,6 +134,5 @@ int main()
         
         ofile.close();
         
-    //}
     
 }
